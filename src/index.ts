@@ -1,16 +1,13 @@
+import 'module-alias/register';
 import Koa from 'koa';
 import Router from 'koa-router';
+
+import api from '@/api';
 
 const app = new Koa();
 const router = new Router();
 
-router.get('/', ctx => {
-  ctx.body = 'home';
-});
-
-router.get('/about', ctx => {
-  ctx.body = 'about';
-})
+router.use('/api', api.routes());
 
 app
   .use(router.routes())
