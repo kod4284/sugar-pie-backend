@@ -1,7 +1,8 @@
+import { Context as _ctx } from 'koa';
 import Router from 'koa-router';
 const posts = new Router();
 
-const printInfo = (ctx: any) => {
+const printInfo = (ctx: _ctx) => {
   ctx.body = {
     method: ctx.method,
     path: ctx.path,
