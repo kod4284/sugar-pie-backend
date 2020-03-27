@@ -1,6 +1,7 @@
 import 'module-alias/register';
 import Koa from 'koa';
 import Router from 'koa-router';
+import bodyParser from 'koa-bodyparser';
 
 import api from '@/api';
 
@@ -9,6 +10,7 @@ const router = new Router();
 
 router.use('/api', api.routes());
 
+app.use(bodyParser());
 app
   .use(router.routes())
   .use(router.allowedMethods());
