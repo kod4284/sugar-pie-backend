@@ -12,6 +12,7 @@
     "@types/koa-bodyparser": "^4.3.0",
     "@types/koa-router": "^7.4.0",
     "@types/node": "^13.9.3",
+    "dotenv": "^8.2.0",
     "eslint-config-prettier": "^6.10.1",
     "eslint-plugin-import": "^2.20.1",
     "koa": "^2.11.0",

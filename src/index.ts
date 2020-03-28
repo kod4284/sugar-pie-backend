@@ -2,6 +2,7 @@ import 'module-alias/register';
 import Koa from 'koa';
 import Router from 'koa-router';
 import bodyParser from 'koa-bodyparser';
+import 'dotenv';
 
 import api from '@/api';
 
@@ -15,7 +16,8 @@ app
   .use(router.routes())
   .use(router.allowedMethods());
 
-app.listen(4000, () => {
+const port = process.env.PORT || 4000;
+app.listen(port, () => {
   // eslint-disable-next-line no-console
-  console.log('Listening to port 4000');
+  console.log('Listening to port %d', port);
 });
