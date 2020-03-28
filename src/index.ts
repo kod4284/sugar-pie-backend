@@ -16,5 +16,6 @@ app
   .use(router.allowedMethods());
 
 app.listen(4000, () => {
+  // eslint-disable-next-line no-console
   console.log('Listening to port 4000');
 });

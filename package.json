@@ -13,6 +13,7 @@
     "@types/koa-router": "^7.4.0",
     "@types/node": "^13.9.3",
     "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-import": "^2.20.1",
     "koa": "^2.11.0",
     "koa-bodyparser": "^4.3.0",
     "koa-router": "^8.0.8",
@@ -24,9 +25,11 @@
     "@typescript-eslint/eslint-plugin": "^2.24.0",
     "@typescript-eslint/parser": "^2.24.0",
     "eslint": "^6.8.0",
+    "eslint-config-airbnb-typescript": "^7.2.0",
+    "eslint-import-resolver-alias": "^1.1.2",
     "nodemon": "^2.0.2"
   },
   "_moduleAliases": {
-    "@": "src"
+    "@": "./src"
   }
 }

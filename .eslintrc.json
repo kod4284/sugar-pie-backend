@@ -5,10 +5,18 @@
     "es6": true
   },
   "extends": [
-    "eslint:recommended",
+    "airbnb-typescript/base",
     "prettier",
     "plugin:@typescript-eslint/eslint-recommended"
   ],
+  "settings": {
+    "import/resolver": {
+      "alias": {
+        "map": [["@", "./src"]],
+        "extensions": [".js", ".ts", ".tsx", ".css", ".scss"]
+      }
+    }
+  },
   "globals": {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
@@ -16,7 +24,8 @@
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 2018,
-    "sourceType": "module"
+    "sourceType": "module",
+    "project": "./tsconfig.json"
   },
   "plugins": ["@typescript-eslint"],
   "rules": {
