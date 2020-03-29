@@ -33,6 +33,7 @@
       "vars": "all",
       "args": "after-used",
       "varsIgnorePattern": "^_"
-    }]
+    }],
+    "consistent-return": "off"
   }
 }
