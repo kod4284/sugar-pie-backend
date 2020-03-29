@@ -4,14 +4,15 @@ import {
   write,
   read,
   remove,
-  update
+  update,
+  checkObjectId,
 } from '@/api/posts/posts.ctrl';
 
 const posts = new Router();
 posts.get('/', list);
 posts.post('/', write);
-posts.get('/:id', read);
-posts.delete('/:id', remove);
-posts.patch('/:id', update);
+posts.get('/:id', checkObjectId, read);
+posts.delete('/:id', checkObjectId, remove);
+posts.patch('/:id', checkObjectId, update);
 
 export default posts;

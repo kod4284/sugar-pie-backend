@@ -1,5 +1,17 @@
 import { Context as _ctx } from 'koa';
 import Post from '@/model/post';
+import mongoose from 'mongoose';
+
+const { ObjectId } = mongoose.Types;
+
+export const checkObjectId = (ctx: _ctx, next: Function) => {
+  const { id } = ctx.params;
+  if (!ObjectId.isValid(id)) {
+    ctx.status = 400;
+    return;
+  }
+  return next();
+};
 
 export const write = async (ctx: _ctx) => {
   const { title, body, tags } = ctx.request.body;
