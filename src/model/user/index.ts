@@ -8,6 +8,7 @@ export interface IUserDocument extends UserDocument {
   checkPassword(password: string): Promise<boolean>,
   setPassword(password: string): Promise<void>,
   serialize(): JSON,
+  generateToken(): string,
 }
 
 // model
