@@ -75,7 +75,12 @@ export const login = async (ctx: _ctx) => {
 };
 
 export const check = async (ctx: _ctx) => {
-
+  const { user } = ctx.state;
+  if (!user) {
+    ctx.status = 401;
+    return;
+  }
+  ctx.body = user;
 };
 
 export const logout = async (ctx: _ctx) => {
