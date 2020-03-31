@@ -12,7 +12,6 @@ interface UserInfo {
 const reissueToken = async (ctx: _ctx, next: Function, decoded: UserInfo) => {
   const now = Math.floor(Date.now() / 1000);
   if (decoded.exp - now < 60 * 60 * 24 * 3.5) {
-    console.log('d');
     const user = await User.findById(decoded._id);
     if (user === null) {
       throw new Error('Cannot find user information');
@@ -28,7 +27,6 @@ const reissueToken = async (ctx: _ctx, next: Function, decoded: UserInfo) => {
 const jwtMiddleware = async (ctx: _ctx, next: Function) => {
   const token = ctx.cookies.get('access_token');
   if (!token) {
-    console.log('pass');
     return next();
   }
   try {
@@ -46,7 +44,6 @@ const jwtMiddleware = async (ctx: _ctx, next: Function) => {
     };
 
     await reissueToken(ctx, next, decoded);
-    console.log(decoded);
     return next();
   } catch (e) {
     // eslint-disable-next-line no-console
