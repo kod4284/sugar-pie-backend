@@ -18,8 +18,16 @@ UserSchema.methods.checkPassword = async function (password: string) {
 };
 
 UserSchema.methods.generateToken = function () {
-  // IMPORTANT: you should use your own secret in .env file
-  const secret = process.env.JWT_SECRET || '3181b72e69cabb1761330fce6d0d00ced5957be396294a6cfc53d9990045b6389390e90a375088aa95eb5dd8fbd9d7ddbed13f6b6c164d99777cd5b46aa5186c';
+  const secret = process.env.JWT_SECRET;
+  try {
+    if (!secret) {
+      throw new Error('JWT_SECRET does not exist');
+    }
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error(e);
+    return;
+  }
   const token = jwt.sign(
     {
       _id: this.id,
