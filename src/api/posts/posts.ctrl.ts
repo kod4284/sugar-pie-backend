@@ -5,11 +5,22 @@ import Joi from 'joi';
 
 const { ObjectId } = mongoose.Types;
 
-export const checkObjectId = (ctx: _ctx, next: Function) => {
+export const getPostById = async (ctx: _ctx, next: Function) => {
   const { id } = ctx.params;
   if (!ObjectId.isValid(id)) {
     ctx.status = 400;
     return;
+  }
+  try {
+    const post = await Post.findById(id);
+    if (!post) {
+      ctx.status = 404;
+      return;
+    }
+    ctx.state.post = post;
+    return next();
+  } catch (e) {
+    ctx.throw(500, e);
   }
   return next();
 };
@@ -42,17 +53,7 @@ export const list = async (ctx: _ctx) => {
 };
 
 export const read = async (ctx: _ctx) => {
-  const { id } = ctx.params;
-  try {
-    const post = await Post.findById(id).exec();
-    if (!post) {
-      ctx.status = 404;
-      return;
-    }
-    ctx.body = post;
-  } catch (e) {
-    ctx.throw(500, e);
-  }
+  ctx.body = ctx.state.post;
 };
 
 export const remove = async (ctx: _ctx) => {
@@ -86,6 +87,7 @@ export const write = async (ctx: _ctx) => {
     title,
     body,
     tags,
+    user: ctx.state.user,
   });
   try {
     await post.save();
