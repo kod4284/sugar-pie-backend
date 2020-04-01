@@ -7,12 +7,17 @@ import {
   update,
   checkObjectId,
 } from '@/api/posts/posts.ctrl';
+import checkLoggedIn from '@/lib/checkLoggedIn';
 
 const posts = new Router();
 posts.get('/', list);
-posts.post('/', write);
-posts.get('/:id', checkObjectId, read);
-posts.delete('/:id', checkObjectId, remove);
-posts.patch('/:id', checkObjectId, update);
+posts.post('/', checkLoggedIn, write);
+
+const post = new Router();
+post.get('/', read);
+post.delete('/', checkLoggedIn, remove);
+post.patch('/', checkLoggedIn, update);
+
+posts.use('/:id', checkObjectId, post.routes());
 
 export default posts;
