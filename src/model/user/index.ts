@@ -5,8 +5,10 @@ import { UserDocument } from '@/model/user/document';
 // document
 export interface IUserDocument extends UserDocument {
   // also we can declare methods here
-  checkPassword(password: string): boolean,
-  setPassword(password: string): boolean
+  checkPassword(password: string): Promise<boolean>,
+  setPassword(password: string): Promise<void>,
+  serialize(): JSON,
+  generateToken(): string,
 }
 
 // model
