@@ -34,15 +34,22 @@ export const getPostById = async (ctx: _ctx, next: Function) => {
   return next();
 };
 
-
 export const list = async (ctx: _ctx) => {
   const page = parseInt(ctx.query.page || '1', 10);
   if (page < 1) {
     ctx.status = 400;
     return;
   }
+
+  const { tag, username } = ctx.query;
+  const query = {
+    ...(username ? { 'user.username': username } : {}),
+    ...(tag ? { tags: tag } : {})
+  };
+
+
   try {
-    const posts = await Post.find()
+    const posts = await Post.find(query)
       .sort({ _id: -1 })
       .limit(10)
       .skip((page - 1) * 10)
