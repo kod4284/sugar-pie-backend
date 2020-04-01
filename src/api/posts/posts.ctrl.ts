@@ -5,6 +5,15 @@ import Joi from 'joi';
 
 const { ObjectId } = mongoose.Types;
 
+export const checkOwnPost = (ctx: _ctx, next: Function) => {
+  const { user, post } = ctx.state;
+  if (post.user._id.toString() !== user._id) {
+    ctx.status = 403;
+    return;
+  }
+  return next();
+};
+
 export const getPostById = async (ctx: _ctx, next: Function) => {
   const { id } = ctx.params;
   if (!ObjectId.isValid(id)) {

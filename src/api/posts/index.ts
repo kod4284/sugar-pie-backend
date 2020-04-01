@@ -6,6 +6,7 @@ import {
   remove,
   update,
   getPostById,
+  checkOwnPost,
 } from '@/api/posts/posts.ctrl';
 import checkLoggedIn from '@/lib/checkLoggedIn';
 
@@ -15,8 +16,8 @@ posts.post('/', checkLoggedIn, write);
 
 const post = new Router();
 post.get('/', read);
-post.delete('/', checkLoggedIn, remove);
-post.patch('/', checkLoggedIn, update);
+post.delete('/', checkLoggedIn, checkOwnPost, remove);
+post.patch('/', checkLoggedIn, checkOwnPost, update);
 
 posts.use('/:id', getPostById, post.routes());
 
