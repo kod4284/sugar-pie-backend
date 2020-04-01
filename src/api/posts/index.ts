@@ -5,7 +5,7 @@ import {
   read,
   remove,
   update,
-  checkObjectId,
+  getPostById,
 } from '@/api/posts/posts.ctrl';
 import checkLoggedIn from '@/lib/checkLoggedIn';
 
@@ -18,6 +18,6 @@ post.get('/', read);
 post.delete('/', checkLoggedIn, remove);
 post.patch('/', checkLoggedIn, update);
 
-posts.use('/:id', checkObjectId, post.routes());
+posts.use('/:id', getPostById, post.routes());
 
 export default posts;
